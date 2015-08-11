@@ -41,6 +41,7 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'molok/vcscommand.vim'
 Plugin 'brailsmt/vim-plugin-minibufexpl'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'JalaiAmitahl/maven-compiler.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -299,17 +300,13 @@ if !exists("set_au")
    let set_au = 1
    " C/C++ autocommands
    au bufnewfile *.c,*.cpp,*.h call Make_C_SourceTemplate()
-   "au bufnewfile *.cpp call Make_cpp_template()
    au bufreadpost *.cpp,*.c,*.h call Generate_Highlighting()
    au bufnewfile *.java call Make_Java_SourceTemplate()
-   "au bufreadpost *.java call Add_Id_Tag()
    au bufreadpost *.cpp,*.c,*.h,*.java syn match semicolon #;$# | hi semicolon guifg=red gui=bold ctermfg=1
 
    au bufreadpost *.clj set foldmethod=marker
  
    " Java autocommands
-   "au bufreadpre,bufnewfile *.java,pom.xml compiler maven2 | so ~/.vim/macro/maven.vim 
-   au bufreadpre,bufnewfile *.java,pom.xml compiler maven2
    au bufreadpre,bufnewfile pom.xml set ft=java ft=xml
 
    " Various autocommands
