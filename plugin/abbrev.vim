@@ -1,0 +1,12 @@
+iabbr flase false
+iabbr ture true
+iabbr teh the
+iabbr thier thier
+iabbr fro for
+iabbr inc include
+iabbr imp import
+iabbr ctemplate <c-r>=Make_C_or_Java_SourceTemplate()<cr><esc>ddgg/*\/<cr>:noh<cr>o
+iabbr peice piece
+iabbr Peice Piece
+iabbr beleive believe
+iabbr Beleive Believe

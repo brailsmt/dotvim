@@ -1,0 +1,16 @@
+disabled_plugins
+*b0rk*
+vimball
+bundle
+disabled
+disabled_plugins
+eclim.b0rked
+eclim
+external
+CVS
+*.tar.gz
+netrw.vba
+out.txt
+ri-browser.zip
+ruby.vim.diff
+*.patch

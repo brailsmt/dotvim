@@ -1,0 +1,89 @@
+ArgumentsForArray	envmacros.vim	/function! s:ArgumentsForArray(/
+Change	envmacros.vim	/function! s:Change(/
+Compute	templates.vim	/function! <SID>Compute(/
+DeleteMacro	custommacros.vim	/function! <SID>DeleteMacro(/
+EditMacro	custommacros.vim	/function! <SID>EditMacro(/
+Exec	templates.vim	/function! <SID>Exec(/
+ForwardSearchLaTeX	compiler.vim	/function! ForwardSearchLaTeX(/
+GotoErrorLocation	compiler.vim	/function! GotoErrorLocation(/
+Input	bibtex.vim	/function! s:Input(/
+MakeTexFolds	folding.vim	/function! MakeTexFolds(/
+NewMacro	custommacros.vim	/function! NewMacro(/
+PositionPreviewWindow	compiler.vim	/function! PositionPreviewWindow(/
+ProcessTemplate	templates.vim	/function! <SID>ProcessTemplate(/
+PromptForEnvironment	envmacros.vim	/function! PromptForEnvironment(/
+PutInNonumber	envmacros.vim	/function! s:PutInNonumber(/
+ReadMacro	custommacros.vim	/function! <SID>ReadMacro(/
+ReadTemplate	templates.vim	/function! <SID>ReadTemplate(/
+RedrawMacro	custommacros.vim	/function! RedrawMacro(/
+RunLaTeX	compiler.vim	/function! RunLaTeX(/
+SetCustomMacrosMenu	custommacros.vim	/function! <SID>SetCustomMacrosMenu(/
+SetTeXCompilerTarget	compiler.vim	/function! SetTeXCompilerTarget(/
+SetTeXOptions	main.vim	/function! <SID>SetTeXOptions(/
+SetTeXTarget	compiler.vim	/function! SetTeXTarget(/
+SetTemplateMenu	templates.vim	/function! <SID>SetTemplateMenu(/
+SetUpEnvironmentsPrompt	envmacros.vim	/function! SetUpEnvironmentsPrompt(/
+SetupGreekLetters	main.vim	/	function! <SID>SetupGreekLetters(/
+SmartBS	main.vim	/function! s:SmartBS(/
+SmartDots	main.vim	/function! <SID>SmartDots(/
+TEX_InsertGreekLetter	main.vim	/	function! TEX_InsertGreekLetter(/
+TexFill	main.vim	/function! s:TexFill(/
+TexFoldTextFunction	folding.vim	/function! TexFoldTextFunction(/
+TexFormatLine	main.vim	/function! s:TexFormatLine(/
+TexQuotes	main.vim	/function! s:TexQuotes(/
+Tex_AmsLatex	envmacros.vim	/function! Tex_AmsLatex(/
+Tex_ChooseFile	main.vim	/function! Tex_ChooseFile(/
+Tex_CleanSearchHistory	main.vim	/function! Tex_CleanSearchHistory(/
+Tex_CounterMenus	elementmacros.vim	/	function! <SID>Tex_CounterMenus(/
+Tex_DimMenus	elementmacros.vim	/	function! <SID>Tex_DimMenus(/
+Tex_DoEnvironment	envmacros.vim	/function! Tex_DoEnvironment(/
+Tex_EnvMacros	envmacros.vim	/function! <SID>Tex_EnvMacros(/
+Tex_FastEnvironmentInsert	envmacros.vim	/function! Tex_FastEnvironmentInsert(/
+Tex_FontDiacritics	elementmacros.vim	/	function! <SID>Tex_FontDiacritics(/
+Tex_FontFamily	elementmacros.vim	/	function! <SID>Tex_FontFamily(/
+Tex_FontSize	elementmacros.vim	/	function! <SID>Tex_FontSize(/
+Tex_Fontfont	elementmacros.vim	/	function! <SID>Tex_Fontfont(/
+Tex_GetMainFileName	main.vim	/function! Tex_GetMainFileName(/
+Tex_IncrementNumber	main.vim	/function! Tex_IncrementNumber(/
+Tex_InsSecAdv	wizardfuncs.vim	/function! Tex_InsSecAdv(/
+Tex_MathMenuRemove	mathmacros.vim	/function! Tex_MathMenuRemove(/
+Tex_MenuConfigure	texmenuconf.vim	/function! Tex_MenuConfigure(/
+Tex_PutEnvironment	envmacros.vim	/function! Tex_PutEnvironment(/
+Tex_PutPackage	packages.vim	/function! Tex_PutPackage(/
+Tex_RemoveElementMenus	elementmacros.vim	/	function! Tex_RemoveElementMenus(/
+Tex_ResetIncrementNumber	main.vim	/function! Tex_ResetIncrementNumber(/
+Tex_SectionMacros	envmacros.vim	/function! <SID>Tex_SectionMacros(/
+Tex_ShowVariableValue	main.vim	/function! Tex_ShowVariableValue(/
+Tex_SpecialMacros	envmacros.vim	/function! <SID>Tex_SpecialMacros(/
+Tex_VariousMenus	elementmacros.vim	/	function! <SID>Tex_VariousMenus(/
+Tex_VisSecAdv	wizardfuncs.vim	/function! Tex_VisSecAdv(/
+Tex_change_environment	envmacros.vim	/function! Tex_change_environment(/
+Tex_description	envmacros.vim	/function! Tex_description(/
+Tex_document	envmacros.vim	/function! Tex_document(/
+Tex_eqnarray	envmacros.vim	/function! Tex_eqnarray(/
+Tex_figure	envmacros.vim	/function! Tex_figure(/
+Tex_itemize	envmacros.vim	/function! Tex_itemize(/
+Tex_list	envmacros.vim	/function! Tex_list(/
+Tex_minipage	envmacros.vim	/function! Tex_minipage(/
+Tex_pack	packages.vim	/function! Tex_pack(/
+Tex_pack_all	packages.vim	/function! Tex_pack_all(/
+Tex_pack_check	packages.vim	/function! Tex_pack_check(/
+Tex_pack_one	packages.vim	/function! Tex_pack_one(/
+Tex_pack_supp	packages.vim	/function! Tex_pack_supp(/
+Tex_pack_supp_menu	packages.vim	/function! Tex_pack_supp_menu(/
+Tex_pack_uncheck	packages.vim	/function! Tex_pack_uncheck(/
+Tex_pack_updateall	packages.vim	/function! Tex_pack_updateall(/
+Tex_package_from_line	envmacros.vim	/function! Tex_package_from_line(/
+Tex_section	wizardfuncs.vim	/function! Tex_section(/
+Tex_section_adv	wizardfuncs.vim	/function! Tex_section_adv(/
+Tex_section_call	wizardfuncs.vim	/function! s:Tex_section_call(/
+Tex_section_curr_rel_value	wizardfuncs.vim	/function! s:Tex_section_curr_rel_value(/
+Tex_section_curr_value	wizardfuncs.vim	/function! s:Tex_section_curr_value(/
+Tex_section_detection	wizardfuncs.vim	/function! s:Tex_section_detection(/
+Tex_section_name	wizardfuncs.vim	/function! s:Tex_section_name(/
+Tex_table	envmacros.vim	/function! Tex_table(/
+Tex_tabular	envmacros.vim	/function! Tex_tabular(/
+Tex_texrc	texmenuconf.vim	/function! Tex_texrc(/
+Tex_thebibliography	envmacros.vim	/function! Tex_thebibliography(/
+UpdatePreviewWindow	compiler.vim	/function! UpdatePreviewWindow(/
+ViewLaTeX	compiler.vim	/function! ViewLaTeX(/

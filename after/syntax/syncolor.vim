@@ -1,0 +1,2 @@
+
+hi comment guifg=green
