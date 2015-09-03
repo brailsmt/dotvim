@@ -5,6 +5,7 @@ include REXML
 
 xmlResults = Dir['target/surefire-reports/*.xml']
 xmlResults.each {|xml|
+  puts xml
     doc = Document.new(File.new(xml))
     xpath = '//testcase/failure'
     XPath.each(doc, xpath) { |node|

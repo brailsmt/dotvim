@@ -1,27 +1,15 @@
 "$Revision: 1.9 $
+" vim: fdm=marker
 
-"xterm settings
-"set t_AF=[%?%p1%{8}%<%t3%p1%d%e%p1%{22}%+%d;1%;m
-"set t_AB=[%?%p1%{8}%<%t4%p1%d%e%p1%{32}%+%d;1%;m
-"set t_kb=
-"fixdel
-"Eterm settings for 16 colors    {{{
-"set t_Co=16
-"set t_AF=[%?%p1%{8}%<%t3%p1%d%e%p1%{22}%+%d;1%;m
-"set t_AB=[%?%p1%{8}%<%t4%p1%d%e%p1%{32}%+%d;1%;m
 set t_kb=
-"fixdel
-"}}}
+
 "Turn on syntax highlighting  {{{
 if !exists("syntax_on")
    syntax on
 endif
 "}}}
 
-" Use pathogen to manage packages in ~/.vim/bundle, this is not a nefarious command infect() is just the poorly chosen
-" name for this entry point
-"execute pathogen#infect()
-
+" Vundle plugin definitions
 "{{{
 "set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -29,20 +17,26 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rking/ag.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fireplace'
-"Plugin 'tpope/vim-classpath'
-Plugin 'molok/vcscommand.vim'
-Plugin 'brailsmt/vim-plugin-minibufexpl'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'JalaiAmitahl/maven-compiler.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'brailsmt/vim-plugin-minibufexpl' " minibufexpl with some enhancements
+Plugin 'dln/avro-vim'                    " avro syntax file
+Plugin 'gmarik/Vundle.vim'               " Vundle
+Plugin 'guns/vim-clojure-static'         " something something clojure
+Plugin 'kien/ctrlp.vim'                  " ctrl-p - fuzzy filename searc
+Plugin 'kien/rainbow_parentheses.vim'    " make lisp parens all pretty
+Plugin 'rking/ag.vim'                    " super fast grep, but better
+Plugin 'scrooloose/nerdtree'             " file browser
+Plugin 'scrooloose/syntastic'            " syntax check on file save
+Plugin 'sjl/gundo.vim'                   " visualize vim's undo tree
+Plugin 'tfnico/vim-gradle'               " gradle stuff
+Plugin 'tpope/vim-dispatch'              " async for vim commands
+Plugin 'tpope/vim-fireplace'             " lisp repl-y stuff
+Plugin 'tpope/vim-fugitive'              " Work with git within vim
+Plugin 'vim-ruby/vim-ruby'               " ruby stuff
+Plugin 'Valloric/YouCompleteMe'          " complete as you type super smart completion
 
+" Plugins I used to use
+"Plugin 'molok/vcscommand.vim'            " work with VCS
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "}}}
@@ -88,7 +82,7 @@ call vundle#end()            " required
    "set foldmethod=marker          " Fold manually to maintain control
    "set foldmarker={,}
    set foldnestmax=2
-   set foldmethod=syntax          " Fold manually to maintain control
+   set foldmethod=syntax          " Fold according to syntax, not as nice as marker, but co-workers don't like the markers
    set diffopt=filler,iwhite      " ignore whitespace when diffing...
    set wildmenu                   " term menus for command mode
    set wildmode=list:longest,full " ditto
@@ -130,9 +124,6 @@ call vundle#end()            " required
    set grepprg=ag\ -f\ --nogroup\ --column
    set grepformat=%f:%l:%c:%m
 
-   " Speed up completion
-   set complete-=i
-
    " Settings for JavaImp for generating java import statements
    let g:JavaImpSortJavaFirst = 1
    let g:JavaImpSortBin = "" 
@@ -143,7 +134,7 @@ call vundle#end()            " required
    let g:ctrlp_working_path_mode=0
    let g:ctrlp_regexp=0
    let g:ctrlp_by_filename=1
-   let g:ctrlp_user_command='ag %s -f -l --nocolor -g ""'
+   let g:ctrlp_user_command='ag %s -U -f -l --nocolor -g ""'
    let g:ctrlp_use_caching=0
    
    " ag options
@@ -187,9 +178,18 @@ call vundle#end()            " required
    let g:ycm_complete_in_comments=1 
    let g:ycm_complete_in_strings=1 
    let g:ycm_autoclose_preview_window_after_completion=1
-   let g:ycm_key_list_select_completion=['<TAB>', '<Down>'] ", '<Enter>']
+   let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
 
-   
+   " Gundo options
+   let g:gundo_preview_bottom = 1
+   let g:gundo_right = 1
+
+   " syntastic options
+   let g:syntastic_java_javac_config_file_enabled = 1
+   let g:syntastic_always_populate_loc_list = 1
+   let g:syntastic_check_on_open = 0
+   let g:syntastic_check_on_wq = 0
+   let g:syntastic_mode_map = { 'mode': 'passive' }
 
 "}}}
 "keymaps {{{
@@ -225,9 +225,6 @@ nmap <silent> <leader>jdb :call Make_JDB_Breakpoint_At_Cursor()<cr>
 " fold the code block using '\\'
 nmap <silent> <leader><leader> V%zf
 
-" Display the man page for the work under the cursor
-"nmap <silent> K :Man <c-r>=expand("<cword>")<cr><cr>
-
 " make '\syn' sync the syntax from the top of the file
 nmap <silent> <leader>syn :syn sync fromstart<cr>
 
@@ -256,29 +253,30 @@ else
     nmap <silent> <leader>smy :so ~/.vim/macro/myfuncs.vim<cr>
 endif
 
-" remap arrow keys to jump to compile errors
-"nmap <silent> <right>  :cn<cr>
-"nmap <silent> <left>   :cp<cr>
-"nmap <silent> <up>     :crewind<cr>
-"nmap <silent> <down>   :copen 5<cr>
-"nmap <silent> <c-down> :cclose<cr>
-
 " remap arrow keys to jump to compile errors/warnings with eclim
-nmap <silent> <right>  :lnext<cr>
-nmap <silent> <left>   :lprevious<cr>
-nmap <silent> <up>     :lrewind<cr>
-nmap <silent> <down>   :lopen 5<cr>
-nmap <silent> <c-right>  :cnext<cr>
-nmap <silent> <c-left>   :cprevious<cr>
-nmap <silent> <c-up>     :crewind<cr>
-nmap <silent> <c-down>   :copen 5<cr>
-nmap <silent> <c-down> :lclose<cr>
 
-"VCScommand mapping
-nmap <Leader>cN :set noscb<cr>:40vs<cr>:VCSAnnotate<cr><c-w>k:wq<cr>gg:set scb<CR>:set nowrap<CR><C-w>lgg:set scb<CR>:set nowrap<CR>
+nmap <silent> <leader>lc :call SetLocationMode()<cr>
+nmap <silent> <leader>qf :call SetQuickfixMode()<cr>
+function! SetLocationMode() 
+    nmap <silent> <right>      :lnext<cr>
+    nmap <silent> <left>       :lprevious<cr>
+    nmap <silent> <up>         :lrewind<cr>
+    nmap <silent> <down>       :lopen 5<cr>
+    nmap <silent> <down><down> :lclose<cr>
+endfunction
+function! SetQuickfixMode()
+    nmap <silent> <right>      :cnext<cr>
+    nmap <silent> <left>       :cprevious<cr>
+    nmap <silent> <up>         :crewind<cr>
+    nmap <silent> <down>       :copen 5<cr>
+    nmap <silent> <down><down> :cclose<cr>
+endfunction
+call SetQuickfixMode()
 
+nmap <leader>nt :NERDTreeToggle<cr>
 
-nmap <Leader>nt :NERDTreeToggle<cr>
+" syntastic mappings
+nmap <silent> <leader>sc :SyntasticCheck<cr> | :call SetLocationMode()<cr>
 
 "Add a mark in the current buffer that will cause vimdiff to align this with the other window on a
 "specific line.
@@ -306,9 +304,6 @@ if !exists("set_au")
 
    au bufreadpost *.clj set foldmethod=marker
  
-   " Java autocommands
-   au bufreadpre,bufnewfile pom.xml set ft=java ft=xml
-
    " Various autocommands
    au bufreadpre,bufnewfile *.story set ft=jbehave
    au bufreadpre,bufnewfile *.bnf set ft=bnf
@@ -317,13 +312,13 @@ if !exists("set_au")
    au bufreadpre,bufnewfile *.ezt set ft=ezt
    au bufreadpre,bufnewfile *.ddl,*.dml set ft=sql
    au bufnewfile *.rb call Make_Ruby_Template()
+   au bufreadpre,bufnewfile build.gradle,gradle.* set ft=groovy
 
    " Settings for log files
    au bufreadpre,bufnewfile *.log set nowrap
 
    " Set syntax to markdown for all *.md files
    au bufnewfile,bufreadpost *.md set ft=markdown
-
 endif
 "}}}
 "cscope settings {{{
@@ -353,71 +348,3 @@ else
     set csto=1
 endif
 "}}}
-
-""Set some java highlighting options    {{{
-let java_highlight_java_lang = 1
-"let java_highlight_java_beans = 1
-"let java_highlight_java_beans_beancontext = 1
-let java_highlight_java_io = 1
-"let java_highlight_java_lang_ref = 1
-"let java_highlight_java_lang_reflect = 1
-"let java_highlight_java_lang_math = 1
-"let java_highlight_java_net = 1
-"let java_highlight_java_security = 1
-"let java_highlight_java_security_acl = 1
-"let java_highlight_java_security_cert = 1
-"let java_highlight_java_security_interfaces = 1
-"let java_highlight_java_security_spec = 1
-"let java_highlight_java_text = 1
-let java_highlight_java_util = 1
-"let java_highlight_java_util_jar = 1
-"let java_highlight_java_util_zip = 1
-"let java_highlight_javax_crypto = 1
-"let java_highlight_java_awt = 1
-"let java_highlight_java_awt_color = 1
-"let java_highlight_java_awt_datatransfer = 1
-"let java_highlight_java_awt_dnd = 1
-"let java_highlight_java_awt_dnd_peer = 1
-"let java_highlight_java_awt_event = 1
-"let java_highlight_java_awt_font = 1
-"let java_highlight_java_awt_geom = 1
-"let java_highlight_java_awt_im = 1
-"let java_highlight_java_awt_image = 1
-"let java_highlight_java_awt_image_renderable = 1
-"let java_highlight_java_awt_peer = 1
-"let java_highlight_java_awt_print = 1
-"let java_highlight_javax_accessibility = 1
-"let java_highlight_javax_swing = 1
-"let java_highlight_javax_swing_border = 1
-"let java_highlight_javax_swing_colorchooser = 1
-"let java_highlight_javax_swing_event = 1
-"let java_highlight_javax_swing_filechooser = 1
-"let java_highlight_javax_swing_plaf = 1
-"let java_highlight_javax_swing_table = 1
-"let java_highlight_javax_swing_text = 1
-"let java_highlight_javax_swing_text_html = 1
-"let java_highlight_javax_swing_text_html_parser = 1
-"let java_highlight_javax_swing_text_rtf = 1
-"let java_highlight_javax_swing_tree = 1
-"let java_highlight_javax_swing_undo = 1
-"let java_highlight_java_rmi = 1
-"let java_highlight_java_rmi_activation = 1
-"let java_highlight_java_rmi_dgc = 1
-"let java_highlight_java_rmi_registry = 1
-"let java_highlight_java_rmi_server = 1
-"let java_highlight_java_sql = 1
-"let java_highlight_javax_ejb = 1
-"let java_highlight_javax_ejb_deployment = 1
-"let java_highlight_javax_jms = 1
-"let java_highlight_javax_naming = 1
-"let java_highlight_javax_naming_directory = 1
-"let java_highlight_javax_naming_spi = 1
-"let java_highlight_javax_servlet = 1
-"let java_highlight_javax_servlet_http = 1
-"let java_highlight_javax_sql = 1
-"let java_highlight_javax_transaction = 1
-"let java_highlight_javax_transaction_xa = 1
-"
-let java_allow_cpp_keywords=1
-let java_highlight_functions="style"
-""}}}
