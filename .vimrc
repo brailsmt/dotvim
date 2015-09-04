@@ -97,7 +97,7 @@ call vundle#end()            " required
    set cinwords=if,else,while,do,for,switch,case  " these are pretty good defaults
 
    "Set my statusline
-   set statusline=%<%f\ %h%m%r\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ %=%l,%c%V\ \ \ \ \ %P
+   set statusline=%t\ \ \ \ \ %<(%{fugitive#head()})\ \ \ \ \ %{expand(\"%:h\")}%h%m%r\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ %=%l,%c%V\ \ \ \ \ %P
    set foldtext='+'.v:folddashes.substitute(GetFoldedHeader(),'\\\/\\\/\\\|\\*\\','','g')
 
 
@@ -190,6 +190,8 @@ call vundle#end()            " required
    let g:syntastic_check_on_open = 0
    let g:syntastic_check_on_wq = 0
    let g:syntastic_mode_map = { 'mode': 'passive' }
+   hi link SyntasticErrorSign Error
+   hi link SyntasticWarningSign Warning
 
 "}}}
 "keymaps {{{
@@ -246,7 +248,8 @@ if has("win16") || has("win32") || has("win64")
     nmap <silent> <leader>my :sp ~/vimfiles/macro/myfuncs.vim<cr>
     nmap <silent> <leader>smy :so ~/vimfiles/macro/myfuncs.vim<cr>
 else
-    nmap <silent> <leader>rc :sp ~/.vimrc<cr>
+    " this requires a symlink to ~/.vimrc
+    nmap <silent> <leader>rc :sp ~/.vim/.vimrc<cr>  
     nmap <silent> <leader>src :so ~/.vimrc<cr>
     nmap <silent> <leader>mid :sp ~/.vim/colors/midnight2.vim<cr>
     nmap <silent> <leader>my :sp ~/.vim/macro/myfuncs.vim<cr>
@@ -262,14 +265,14 @@ function! SetLocationMode()
     nmap <silent> <left>       :lprevious<cr>
     nmap <silent> <up>         :lrewind<cr>
     nmap <silent> <down>       :lopen 5<cr>
-    nmap <silent> <down><down> :lclose<cr>
+    nmap <silent> <down><down> :lclose<cr> | :sign unplace *<cr>
 endfunction
 function! SetQuickfixMode()
     nmap <silent> <right>      :cnext<cr>
     nmap <silent> <left>       :cprevious<cr>
     nmap <silent> <up>         :crewind<cr>
     nmap <silent> <down>       :copen 5<cr>
-    nmap <silent> <down><down> :cclose<cr>
+    nmap <silent> <down><down> :cclose<cr> | :sign unplace *<cr>
 endfunction
 call SetQuickfixMode()
 
