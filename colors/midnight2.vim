@@ -104,6 +104,6 @@ hi Todo guifg=yellow3 guibg=blue3 gui=bold ctermfg=3
 "hi SignError guibg=#500000 gui=italic
 "hi SignWarn  guibg=yellow4 guifg=black gui=bold
 
-highlight WarningMsg guifg=yellow4 guibg=steelblue4
-highlight Error      guifg=red4 guibg=steelblue4
-highlight SignColumn guibg=steelblue4 guifg=navyblue
+"hi WarningMsg guifg=yellow4 guibg=steelblue4
+"hi Error      guifg=red4 guibg=steelblue4
+"hi SignColumn guibg=steelblue4 guifg=navyblue

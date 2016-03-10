@@ -1,7 +1,8 @@
 "$Revision: 1.9 $
 " vim: fdm=marker
 
-set t_kb=
+let g:python_host_prog='/usr/local/bin/python'
+"set t_kb=
 
 "Turn on syntax highlighting  {{{
 if !exists("syntax_on")
@@ -9,95 +10,91 @@ if !exists("syntax_on")
 endif
 "}}}
 
-" Vundle plugin definitions
+" plugin definitions
 "{{{
-"set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-" alternatively, pass a path where Vundle should install plugins
-call vundle#begin()
+call plug#begin("~/.vim/vim-plug")
 
-" let Vundle manage Vundle, required
-Plugin 'airblade/vim-gitgutter'
-Plugin 'brailsmt/vim-plugin-minibufexpl' " minibufexpl with some enhancements
-Plugin 'dln/avro-vim'                    " avro syntax file
-Plugin 'gmarik/Vundle.vim'               " Vundle
-Plugin 'guns/vim-clojure-static'         " something something clojure
-Plugin 'kien/ctrlp.vim'                  " ctrl-p - fuzzy filename searc
-Plugin 'kien/rainbow_parentheses.vim'    " make lisp parens all pretty
-Plugin 'rking/ag.vim'                    " super fast grep, but better
-Plugin 'scrooloose/nerdtree'             " file browser
-Plugin 'scrooloose/syntastic'            " syntax check on file save
-Plugin 'sjl/gundo.vim'                   " visualize vim's undo tree
-Plugin 'tfnico/vim-gradle'               " gradle stuff
-Plugin 'tpope/vim-dispatch'              " async for vim commands
-Plugin 'tpope/vim-fireplace'             " lisp repl-y stuff
-Plugin 'tpope/vim-fugitive'              " Work with git within vim
-Plugin 'vim-ruby/vim-ruby'               " ruby stuff
-Plugin 'Valloric/YouCompleteMe'          " complete as you type super smart completion
+" let vim-plug manage plugins
+Plug 'airblade/vim-gitgutter'
+Plug 'brailsmt/vim-plugin-minibufexpl' " minibufexpl with some enhancements
+Plug 'dln/avro-vim'                    " avro syntax file
+Plug 'guns/vim-clojure-static'         " something something clojure
+Plug 'kien/ctrlp.vim'                  " ctrl-p - fuzzy filename searc
+Plug 'kien/rainbow_parentheses.vim'    " make lisp parens all pretty
+Plug 'rking/ag.vim'                    " super fast grep, but better
+Plug 'scrooloose/nerdtree'             " file browser
+Plug 'sjl/gundo.vim'                   " visualize vim's undo tree
+Plug 'tfnico/vim-gradle'               " gradle stuff
+Plug 'tpope/vim-fireplace'             " lisp repl-y stuff
+Plug 'tpope/vim-fugitive'              " Work with git within vim
+Plug 'vim-ruby/vim-ruby'               " ruby stuff
+Plug 'ervandew/supertab'               " supertab
+Plug 'Valloric/YouCompleteMe'          " complete as you type super smart completion
+Plug 'pgdouyon/vim-accio'
 
-" Plugins I used to use
-"Plugin 'molok/vcscommand.vim'            " work with VCS
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
+"Plug 'benekastah/neomake'
+"Plug 'scrooloose/syntastic'            " syntax check on file save
 "}}}
 
 "Some custom default settings {{{
-   colorscheme midnight2          " set default colorscheme to midnight2
    "let g:ctags_path='C:\Documents and Settings\michael.brailsford\bin\ctags.exe'
    "let Tlist_Ctags_Cmd = g:ctags_path
 
+   colors midnight2
+
+   " These settings are required for vim only, nvim has them as defaults
+   if !has('nvim')
+       set backspace=indent,eol,start " Make backspaces delete sensibly
+       set formatoptions=tcqnjl       " This is my preference
+       set history=10000              " set the command history to 10000 entries
+       set incsearch                  " convenient when typing in a regex
+       set laststatus=2               " always display the status line
+       set wildmenu                   " term menus for command mode
+       set viminfo='1000,<100,s5      " viminfo is...cryptic, see :help 'viminfo'
+   else
+       set shada='1000,<100,s5        " shada is...cryptic, see :help 'viminfo'
+   endif
+
    filetype plugin indent on      " Turn filetype indent and plugins on
-   set tabstop=4                  " set tabstop to 4
-   set shiftwidth=4               " make tabs be the same width as 4 spaces
-   set backspace=2                " make backspace work how I expect
-   set textwidth=120              " 80 is the standard, too bad, 100 makes more sense nowadays
-   set nocompatible               " why would I not want to use all of vim's features?
+   set awa                        " Autosave always instead of prompting
+   set diffopt=filler,iwhite      " ignore whitespace when diffing...
+   set expandtab                  " Convert all tabs typed to spaces
+   set fillchars=fold:-           " Fill the fold line with spaces (type alt-space to get the fill char)
+   set foldcolumn=2               " make the nice little fold column 2 cols wide
+   set foldmethod=syntax          " Fold according to syntax, not as nice as marker, but co-workers don't like the markers
+   set foldnestmax=2
+   set formatoptions+=nl          " This is my preference
+   set formatprg=astyle           " astyle is a good source code reformatter
+   set guioptions-=TLlmr          " give me more screen real estate
+   set matchpairs+=<:>            " Allow % to bounce between angles too
+   set modeline                   " this will allow modelines to work
    set nobackup                   " these files get annoying, so turn it off
    set nohlsearch                 " highlighting the current search is annoying
-   set incsearch                  " convenient when typing in a regex
-   set ruler                      " show cursor position
-   set showmatch                  " temporarily highlight the matching parens, brackets, etc...
-   set modeline                   " this will allow modelines to work
-   set formatoptions=tcqn         " This is my preference
-   set guioptions-=T              " give me more screen real estate
-   set guioptions-=m              " ditto
-   set guioptions-=r              " ditto
-   set guioptions-=l              " ditto
-   set guioptions-=L              " ditto
-   set foldcolumn=2               " make the nice little fold column 2 cols wide
-   set history=1000               " set the command history to 1000 entries
-   set wrapscan                   " allow searches to wrap around the end of the file
-   set tags=../*/tags,tags;          " This searches for a tags file from the cwd to the root of the filesystem
-   set formatprg=astyle           " astyle is a good source code reformatter
    set number                     " turn on line numbering
-   set laststatus=2               " always display the status line
-   set awa                        " Autosave always instead of prompting
-   set viminfo='25,<100,:100,s5   " Some viminfo settings
+   set ruler                      " show cursor position
    set scrolloff=5                " Leave 5 lines above and below the cursor when at top and bottom of screen
-   set ul=5000                    " Set the max number of undos
-   set undofile
-   set undodir=~/.vim/undos
-   set vb                         " Set visual bell
-   set fillchars=fold:-           " Fill the fold line with spaces (type alt-space to get the fill char)
-   "set foldmethod=marker          " Fold manually to maintain control
-   "set foldmarker={,}
-   set foldnestmax=2
-   set foldmethod=syntax          " Fold according to syntax, not as nice as marker, but co-workers don't like the markers
-   set diffopt=filler,iwhite      " ignore whitespace when diffing...
-   set wildmenu                   " term menus for command mode
-   set wildmode=list:longest,full " ditto
-   set wildignore+=*.class,.svn,META-INF,target,.git 
-   set backspace=indent,eol,start " Make backspaces delete sensibly
-   set expandtab                  " Convert all tabs typed to spaces
-   set shiftround                 " Indent/outdent to nearest tabstop
-   set matchpairs+=<:>            " Allow % to bounce between angles too
    set shellslash
+   set shiftround                 " Indent/outdent to nearest tabstop
+   set shiftwidth=4               " make tabs be the same width as 4 spaces
+   set showmatch                  " temporarily highlight the matching parens, brackets, etc...
+   set tabstop=4                  " set tabstop to 4
+   set tags=../*/tags,tags;       " This searches for a tags file from the cwd to the root of the filesystem
+   set textwidth=120              " 80 is the standard, too bad, 100 makes more sense nowadays
+   set ul=5000                    " Set the max number of undos
+   set undodir=~/.vim/undos
+   set undofile
+   set vb                         " Set visual bell
+   set wildignore+=*.class,.svn,META-INF,target,.git 
+   set wildmode=list:longest,full 
+   set wrapscan                   " allow searches to wrap around the end of the file
 
    set cinoptions=>1s,:1s,p1s,t0,g0               " whatever this does, I like it :)
    set cinwords=if,else,while,do,for,switch,case  " these are pretty good defaults
 
    "Set my statusline
-   set statusline=%t\ \ \ \ \ %<(%{fugitive#head()})\ \ \ \ \ %{expand(\"%:h\")}%h%m%r\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ %=%l,%c%V\ \ \ \ \ %P
+   set statusline=%t\ \ \ %<(%{fugitive#head()})\ \ \ \ %{expand(\"%:h\")}%h%m%r%=[%{accio#statusline()}]\ \ \ \ \ \ %l,%c%V\ \ \ \ \ %P
    set foldtext='+'.v:folddashes.substitute(GetFoldedHeader(),'\\\/\\\/\\\|\\*\\','','g')
 
 
@@ -138,7 +135,7 @@ call vundle#end()            " required
    let g:ctrlp_use_caching=0
    
    " ag options
-   let g:agprg="ag\ -f\ --column"
+   let g:ag_prg="ag\ -f\ --column"
 
    let g:EclimCompletionMethod = 'omnifunc' 
 
@@ -190,8 +187,8 @@ call vundle#end()            " required
    let g:syntastic_check_on_open = 0
    let g:syntastic_check_on_wq = 0
    let g:syntastic_mode_map = { 'mode': 'passive' }
-   hi link SyntasticErrorSign Error
-   hi link SyntasticWarningSign Warning
+   "hi link SyntasticErrorSign Error
+   "hi link SyntasticWarningSign Warning
 
 "}}}
 "keymaps {{{
@@ -296,15 +293,21 @@ ru! macros/matchit.vim
 ru! ftplugin/man.vim
 
 "}}}
+
 "Custom auto commands  {{{
 if !exists("set_au")
    let set_au = 1
-   " C/C++ autocommands
-   au bufnewfile *.c,*.cpp,*.h call Make_C_SourceTemplate()
-   au bufreadpost *.cpp,*.c,*.h call Generate_Highlighting()
+   " Java autocommands
    au bufnewfile *.java call Make_Java_SourceTemplate()
-   au bufreadpost *.cpp,*.c,*.h,*.java syn match semicolon #;$# | hi semicolon guifg=red gui=bold ctermfg=1
+   au bufreadpost *.java syn match semicolon #;$#
+   au bufreadpost *.java hi semicolon ctermfg=1   
+   au bufwritepost *.java Accio accio-javac
 
+   " maven autocommands
+   au bufreadpost pom.xml compiler pom
+   au bufwritepost pom.xml Accio pom
+
+   " clojure autocommands
    au bufreadpost *.clj set foldmethod=marker
  
    " Various autocommands
@@ -326,14 +329,14 @@ endif
 "}}}
 "cscope settings {{{
 if has("cscope")
-    set csprg=/usr/bin/cscope
+    set csprg=/usr/local/bin/cscope
     set csto=0
     set cst
     "set nocsverb
     set cscopequickfix=s-,g-,d-,c-,t-,i-
     " add any database in current directory
     if filereadable("cscope.out")
-        cs add cscope.out
+        "cs add cscope.out
     endif
     " add database pointed to by environment
     if filereadable($CSCOPE_DB_BASE . "/cscope.out")
