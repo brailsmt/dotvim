@@ -1,0 +1,11 @@
+iabbr flase false
+iabbr ture true
+iabbr teh the
+iabbr thier thier
+iabbr fro for
+iabbr inc include
+iabbr imp import
+iabbr peice piece
+iabbr Peice Piece
+iabbr beleive believe
+iabbr Beleive Believe
