@@ -13,3 +13,9 @@ out.txt
 ri-browser.zip
 ruby.vim.diff
 *.patch
+undos
+.DS_Store
+vim-plug
+*swp
+*.old
+*~

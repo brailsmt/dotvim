@@ -59,24 +59,6 @@ function! Make_JDB_Breakpoint_At_Cursor()
   unlet fn
 endfunction
 "}}}
-""{{{
-"function! EclimCodeCompleteForward()
-"  if pumvisible()
-"    return "\<c-p>"
-"  else
-"    return "\<c-x>\<c-u>"
-"  endif
-"endfunction
-""}}}
-""{{{
-"function! EclimCodeCompleteReverse()
-"  if pumvisible()
-"    return "\<c-n>"
-"  else
-"    return "\<c-x>\<c-u>"
-"  endif
-"endfunction 
-""}}}
 "{{{
 function! InsertTabWrapper()  
   let col = col('.') - 1
@@ -191,14 +173,6 @@ endfunction
 
 " these all require ruby
 ""{{{
-"function! Add_Id_Tag()
-"ruby <<END
-" c = $curbuf
-"    c.append 0, "// $Id$" if c[1].scan(/\$Id:?.*$/).empty?
-"END
-"endfunction
-""}}}
-""{{{
 function! Make_Java_SourceTemplate()
 ruby <<END
  c = $curbuf
@@ -224,56 +198,6 @@ END
 endfunction
 "}}}
 ""{{{
-"function! Make_C_SourceTemplate()
-"ruby <<END
-" c = $curbuf
-" buf_name = c.name.gsub(/.*\//, '')
-"
-" c.append 0, "/* file name  : #{buf_name}"
-" c.append 1, " * authors    : Michael Brailsford"
-" c.append 2, " * created    : #{Time.now}"
-" c.append 3, " * copyright  : (c) #{Time.now.year} Michael Brailsford"
-" c.append 4, " */"
-" buf_name.gsub! /\..*/, ''
-" if c.name =~ /\.h$/
-"   buf_name.capitalize!
-"   def_name = buf_name.upcase + "_H"
-"   c.append 5, ""
-"   c.append 6, "#ifndef #{def_name}"
-"   c.append 7, "#define #{def_name}"
-"   c.append 8, ""
-"   c.append 9, "class #{buf_name} {"
-"   c.append 10, "\tprivate:"
-"   c.append 11, "\tprotected:"
-"   c.append 12, "\tpublic:"
-"   c.append 13, "\t\t#{buf_name}();"
-"   c.append 14, "\t\t#{buf_name}(#{buf_name} &);"
-"   c.append 15, "\t\t~#{buf_name}();"
-"   c.append 16, "};"
-"   c.append 17, "#endif"
-"   VIM::command ":16"
-" elsif c.name =~ /\.cpp$/
-"   c.append 5, ""
-"   c.append 6, "#include \"#{buf_name.downcase}.h\""
-"   c.append 7, "//{{{"
-"   c.append 8, "#{buf_name}::#{buf_name}() {"
-"   c.append 9, "}"
-"   c.append 10, "//}}}"
-"   c.append 11, "//{{{"
-"   c.append 12, "#{buf_name}::#{buf_name}(#{buf_name} & other) {"
-"   c.append 13, "}"
-"   c.append 14, "//}}}"
-"   c.append 15, "//{{{"
-"   c.append 16, "#{buf_name}::~#{buf_name}() {"
-"   c.append 17, "}"
-"   c.append 18, "//}}}"
-"   VIM::command ":7"
-" end
-"
-"END
-"endfunction
-""}}}
-""{{{
 function! Make_Ruby_Template()
 ruby <<END
   #Inserts a source template for ruby files
@@ -292,104 +216,4 @@ ruby <<END
   $curwin.cursor = [7, 15]
 END
 endfunction
-""}}}
-""{{{
-"function! Makecoutstatements()
-"ruby <<END
-" ln, c = $curwin.cursor
-" bufname = $curbuf.name.gsub(/\.c(pp)?/, '_DEBUG')
-" bufname = bufname.split("/").last
-" bufname.upcase!
-"
-" isdefined = false
-" firsttime = true
-" defline = 6
-" high_count = 0
-" tmp_str = ""
-" (1..30).each { |n|
-"   unless isdefined
-"     line = $curbuf[n]
-"     case line
-"       when /^\/\/#define #{bufname}(_[0-9]+)?$/
-"         firsttime = false
-"         tmp = line.split "_"
-"         tmp_str = ""
-"         if tmp.last
-"           high_count = tmp.last.to_i.succ unless tmp.last.to_i < high_count
-"         else
-"           high_count = 1
-"         end
-"         tmp_str << "#{bufname}_#{high_count.to_s}" unless high_count == 0
-"         when /^#define #{bufname}(_[0-9]+)?$/
-"           firsttime = false
-"           isdefined = true
-"           bufname = line.split[1]
-"       end
-"   end
-" }
-" unless firsttime
-"   bufname = tmp_str unless isdefined
-" end
-" $curbuf.append(ln, "#endif")
-" $curbuf.append(ln-1, "#ifdef #{bufname}")
-"
-" $curbuf.append defline, "#define #{bufname}" unless isdefined
-"
-" ln = ln.succ unless isdefined
-" $curwin.cursor = [ln+2, c]
-"END
-"endfunction
-""}}}
-""{{{
-"function! Comment_uncomment_defines(def_name)
-"ruby <<END
-" def_name = VIM.evaluate "a:def_name"
-"
-" (1..45).each { |line_num|
-"   line = $curbuf[line_num]
-"   if line =~ /^#define #{def_name}/
-"     $curbuf[line_num] = "//#{line}"
-"   elsif line =~ /^\/\/#define #{def_name}/
-"     $curbuf[line_num] = line.sub(/\/\//, '')
-"   end
-" }
-"END
-"endfunction
-""}}}
-""{{{
-"function! Make_Method_From_Definition()
-"ruby << END
-" b = $curbuf
-"
-"
-"END
-"endfunction
-""}}}
-""{{{
-"function! Create_source_header_footer()
-"ruby <<END
-"
-" b = $curbuf
-" buf_name = b.name.gsub(/.*\//, '')
-" #this is a kludge to avoid cvs changing this script when it is checked into cvs
-" rev_key_word = "Revizion"
-" log_key_word = "Loz"
-"
-" b.append 0, "/* file name       : #{buf_name}"
-" b.append 1, " * contributors    : Michael Brailsford"
-" b.append 2, " * header inserted : #{Time.now}"
-" b.append 3, " * copyright       : (c) #{Time.now.year} Michael Brailsford"
-" b.append 4, " * version         : $#{rev_key_word.gsub /z/, 's'}$"
-" b.append 5, " */"
-" b.append 6, ""
-" b.append 7, ""
-"
-" b.append b.count, "/*"
-" b.append b.count, " * change log"
-" b.append b.count, " *"
-" b.append b.count, " * $#{log_key_word.gsub /z/, 'g'}$"
-" b.append b.count, " */"
-"
-"END
-"endfunction
 ""}}}

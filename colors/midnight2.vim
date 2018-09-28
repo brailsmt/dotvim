@@ -25,7 +25,8 @@ if exists("syntax_on")
 endif
 let g:colors_name="midnight2"
 
-hi Normal guifg=slategray3 guibg=#000029 ctermfg=14
+hi Normal guifg=#90B6CD guibg=#000029 ctermfg=14
+hi Visual guibg=#90B6CD guifg=#000029 ctermfg=14
 
 "Toggle semicolon matching at the end of lines
 nmap <silent> <leader>; :call ToggleSemicolonHighlighting()<cr>
@@ -36,7 +37,7 @@ function! ToggleSemicolonHighlighting()
       hi semicolon guifg=NONE gui=NONE ctermfg=NONE
    else
       syn match semicolon #;$#
-      hi semicolon guifg=red3 gui=bold ctermfg=1
+      hi semicolon guifg=#CD0000 gui=bold ctermfg=1
       let b:semicolon = 1
    endif
 endfunction
@@ -45,40 +46,38 @@ endfunction
 hi Cursor guibg=fg guifg=bg ctermfg=0 ctermbg=11
 "hi CursorIM   
 hi Directory gui=bold
-hi DiffAdd guibg=slategray4 ctermbg=0
-hi DiffChange guibg=steelblue3 guifg=bg gui=NONE
-hi DiffDelete guibg=slategray4 guifg=slategray3
-hi DiffText guibg=steelblue4 gui=bold
-hi ErrorMsg guibg=red3 ctermfg=0
+hi DiffAdd guibg=#6C7B8B ctermbg=0
+hi DiffChange guibg=#4F94CD guifg=bg gui=NONE
+hi DiffDelete guibg=#6C7B8B guifg=#9FB6CD
+hi DiffText guibg=#36648B gui=bold
+hi ErrorMsg guibg=#CD0000 ctermfg=0
 "hi VertSplit  
-hi Folded guibg=#00001a guifg=yellow3 ctermbg=4 ctermfg=11 gui=NONE
-hi FoldColumn guibg=steelblue3 ctermbg=14 guifg=navyblue ctermfg=11 gui=bold
+hi Folded guibg=#00001a guifg=#CDCD00 ctermbg=4 ctermfg=11 gui=NONE
+hi FoldColumn guibg=#4F94CD ctermbg=14 guifg=#000080 ctermfg=11 gui=bold
 "hi SignColumn
 "hi IncSearch  
-hi LineNr guifg=yellow3 ctermfg=3
-hi MatchParen guibg=navyblue gui=italic
-hi ModeMsg guifg=yellow3 gui=bold ctermfg=3
+hi LineNr guifg=#CDCD00 ctermfg=3
+hi MatchParen guibg=#000080 gui=italic
+hi ModeMsg guifg=#CDCD00 gui=bold ctermfg=3
 "hi MoreMsg(   )
 "hi NonText    
-hi Pmenu guibg=#000090 guifg=lightgrey ctermfg=7 ctermbg=4 cterm=bold
-hi PmenuSel guibg=lightgrey guifg=#000090 gui=bold ctermfg=4 ctermbg=7 cterm=bold
+hi Pmenu guibg=#000090 guifg=#d3d3d3 ctermfg=7 ctermbg=4 cterm=bold
+hi PmenuSel guibg=#d3d3d3 guifg=#000090 gui=bold ctermfg=4 ctermbg=7 cterm=bold
 hi link PmenuSbar Pmenu
 "hi PmenuThumb
 "hi Question   
-hi Search guibg=#000090 guifg=lightgrey
+hi Search guibg=#000090 guifg=#d3d3d3
 "hi SpecialKey 
 "hi SpellBad
 "hi SpellCap
 "hi SpellLocal
 "hi SpellRare
-hi StatusLine guifg=steelblue3
-hi StatusLineNC guifg=steelblue4
+hi StatusLine guifg=#4F94CD
+hi StatusLineNC guifg=#36648B
 "hi TabLine
 "hi TabLineFill
 "hi TabLineSel
 "hi Title      
-hi Visual guifg=bg guibg=fg ctermbg=fg
-"hi VisualNOS  
 "hi WarningMsg 
 "hi WildMenu   
 "hi Menu    
@@ -86,24 +85,28 @@ hi Visual guifg=bg guibg=fg ctermbg=fg
 "hi Tooltip    
 
 " syntax highlighting groups
-hi Comment guifg=chartreuse3 ctermfg=10
-hi Constant guifg=plum3 gui=bold ctermfg=13
-hi String guifg=indianred3 ctermfg=124
-hi Character guifg=mediumpurple3 ctermfg=5
-hi Number guifg=turquoise3 ctermfg=5
+hi Comment guifg=#66cd00 ctermfg=10
+hi Constant guifg=#cd96cd gui=bold ctermfg=13
+hi String guifg=#cd5555 ctermfg=124
+hi Character guifg=#8968cd ctermfg=5
+hi Number guifg=#00cdc5 ctermfg=5
 "hi Identifier 
-hi Statement guifg=khaki3 gui=bold ctermfg=228 
-hi PreProc guifg=firebrick3 gui=italic ctermfg=9
-hi Type  guifg=gold3 gui=bold ctermfg=220
-hi Special guifg=orange ctermfg=208
+hi Statement guifg=#cdc673 gui=bold ctermfg=228 
+hi PreProc guifg=#cd2626 gui=italic ctermfg=9
+hi Type  guifg=#CDAD00 gui=bold ctermfg=220
+hi Special guifg=#ffa500 ctermfg=208
 hi Underlined ctermfg=white cterm=underline
 "hi Ignore     
 "hi Error      
-hi Todo guifg=yellow3 guibg=blue3 gui=bold ctermfg=3 
+hi Todo guifg=#CDCD00 guibg=#0000cd gui=bold ctermfg=3 
 
 "hi SignError guibg=#500000 gui=italic
 "hi SignWarn  guibg=yellow4 guifg=black gui=bold
 
-"hi WarningMsg guifg=yellow4 guibg=steelblue4
-"hi Error      guifg=red4 guibg=steelblue4
-"hi SignColumn guibg=steelblue4 guifg=navyblue
+hi WarningMsg guifg=#8b8b00 guibg=#36648B
+"hi Error      guifg=red4 guibg=#36648B
+"hi SignColumn guibg=#36648B guifg=#000080
+
+hi illuminatedWord guifg=none guibg=#303010
+
+" see ~/.vim/autoload/airline/themes/midnight.vim for airline theming
