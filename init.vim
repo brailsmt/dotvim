@@ -8,6 +8,9 @@ let g:python_host_prog='/usr/local/bin/python2'
 " plugin definitions
 "{{{
 call plug#begin("~/.config/nvim/vim-plug/")
+function! DoRemote(arg)
+	UpdateRemotePlugins
+endfunction
 
 " let vim-plug manage plugins
 Plug 'airblade/vim-gitgutter'
@@ -24,17 +27,14 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'              " Work with git within vim
 Plug 'tpope/vim-surround'              " surround words with quotes, parens, etc...
 Plug 'tpope/vim-eunuch'                " Syntax sugar around unix things like renaming a file
+"Plug 'tpope/vim-classpath'             " classpath support for jumping
 Plug 'vim-ruby/vim-ruby'               " ruby stuff
 Plug 'pgdouyon/vim-accio'              " Async compile on save
 Plug 'artur-shaik/vim-javacomplete2'   " java completion and other cool java stuff
 Plug 'vim-airline/vim-airline'         " fancy statusline
 Plug 'junegunn/vim-easy-align'         " Align text
-Plug 'aperezdc/vim-template'           " template files
-function! DoRemote(arg)
-	UpdateRemotePlugins
-endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/vimproc.vim',   { 'do': 'make' }
 Plug 'will133/vim-dirdiff'
 Plug 'autowitch/hive.vim'
 Plug 'neovimhaskell/haskell-vim'
@@ -45,11 +45,16 @@ Plug 'Twinside/vim-hoogle'
 Plug 'mpickering/hlint-refactor-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'RRethy/vim-illuminate'
-"Plug 'prakashdanish/vim-githubinator'
 Plug 'brailsmt/vim-githubinator'
+Plug 'majutsushi/tagbar'
+"Plug 'brailsmt/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'beeender/Comrade'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
+"Plug 'prakashdanish/vim-githubinator'
+"Plug 'aperezdc/vim-template'           " template files
 "Plug 'guns/vim-clojure-static'         " something something clojure
 "Plug 'rizzatti/dash.vim'               " Use Dash.app on macs
 "Plug 'tfnico/vim-gradle'               " gradle stuff
@@ -224,6 +229,19 @@ let g:NERDDefaultNesting = 1
 nmap <leader>nt :NERDTreeToggle<cr>
 map <silent> <leader>cc <Plug>NERDCommenterToggle
 map <silent> <leader>cl <Plug>NERDCommenterAlignLeft
+"}}}
+
+" tagbar settings
+"{{{
+let g:tagbar_left=1
+"}}}
+
+" easytags settings
+"{{{
+let g:easytags_cmd = '/usr/local/bin/ctags'
+let g:easytags_async = 1
+let g:easytags_autorecurse = 1
+let g:easytags_include_members = 1
 "}}}
 
 "map the tab completion
@@ -408,6 +426,8 @@ nmap <silent> <leader>da O<esc>80I=<esc>j
 " Haskell related keymaps
 nnoremap <silent> <leader>hh :Hoogle<CR>
 
+" toggle class outline tagbar
+nmap <silent> <leader>tb :TagbarToggle<CR>
 
 "}}}
 

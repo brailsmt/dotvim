@@ -1,228 +1,101 @@
+" Each theme is contained in its own file and declares variables scoped to the
+" file.  These variables represent the possible "modes" that airline can
+" detect.  The mode is the return value of mode(), which gets converted to a
+" readable string.  The following is a list currently supported modes: normal,
+" insert, replace, visual, and inactive.
+"
+" Each mode can also have overrides.  These are small changes to the mode that
+" don't require a completely different look.  "modified" and "paste" are two
+" such supported overrides.  These are simply suffixed to the major mode,
+" separated by an underscore.  For example, "normal_modified" would be normal
+" mode where the current buffer is modified.
+"
+" The theming algorithm is a 2-pass system where the mode will draw over all
+" parts of the statusline, and then the override is applied after.  This means
+" it is possible to specify a subset of the theme in overrides, as it will
+" simply overwrite the previous colors.  If you want simultaneous overrides,
+" then they will need to change different parts of the statusline so they do
+" not conflict with each other.
+"
+" First, let's define an empty dictionary and assign it to the "palette"
+" variable. The # is a separator that maps with the directory structure. If
+" you get this wrong, Vim will complain loudly.
+let g:airline#themes#midnight2#palette = {}
 
-hi CtrlParrow1 guifg=#875fd7 guibg=#ffffff ctermfg=98 ctermbg=231   
-hi CtrlParrow2 guifg=#ffffff guibg=#875fd7 ctermfg=231 ctermbg=98   
-hi CtrlParrow3 guifg=#875fd7 guibg=#5f00af ctermfg=98 ctermbg=55   
-hi CtrlPdark guifg=#d7d7ff guibg=#5f00af ctermfg=189 ctermbg=55   
-hi CtrlPlight guifg=#ffffff guibg=#875fd7 ctermfg=231 ctermbg=98   
-hi CtrlPwhite guifg=#5f00af guibg=#ffffff ctermfg=55 ctermbg=231 gui=bold cterm=bold term=bold
-hi airline_a guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=214   
-hi airline_a guifg=#000029 guibg=#4f94cd ctermfg=14 ctermbg=0   
-hi airline_a guifg=#00005f guibg=#dfff00 ctermfg=17 ctermbg=190   
-hi airline_a_bold guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=214 gui=bold cterm=bold term=bold
-hi airline_a_bold guifg=#000029 guibg=#4f94cd ctermfg=14 ctermbg=0 gui=bold cterm=bold term=bold
-hi airline_a_bold guifg=#00005f guibg=#dfff00 ctermfg=17 ctermbg=190 gui=bold cterm=bold term=bold
-hi airline_a_inactive guifg=#4e4e4e guibg=#1c1c1c ctermfg=239 ctermbg=234   
-hi airline_a_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=234   
-hi airline_a_inactive_bold guifg=#4e4e4e guibg=#1c1c1c ctermfg=239 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_a_inactive_bold guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_a_inactive_red guifg=#ff0000 guibg=#1c1c1c ctermfg=160 ctermbg=234   
-hi airline_a_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=234   
-hi airline_a_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=0   
-hi airline_a_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=214   
-hi airline_a_red guifg=#ff0000 guibg=#dfff00 ctermfg=160 ctermbg=190   
-hi airline_a_to_airline_b guifg=#4f94cd guibg=#4f94cd     
-hi airline_a_to_airline_b_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_a_to_airline_b_bold guifg=#dfff00 guibg=#444444   gui=bold cterm=bold term=bold
-hi airline_a_to_airline_b_inactive guifg=#1c1c1c guibg=#262626     
-hi airline_a_to_airline_b_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_a_to_airline_b_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_a_to_airline_b_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_a_to_airline_b_red guifg=#ff0000 guibg=#444444 ctermfg=160    
-hi airline_a_to_airline_b_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_b guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=202   
-hi airline_b guifg=#000029 guibg=#4f94cd ctermfg=0 ctermbg=14   
-hi airline_b guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238   
-hi airline_b_bold guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=202 gui=bold cterm=bold term=bold
-hi airline_b_bold guifg=#000029 guibg=#4f94cd ctermfg=0 ctermbg=14 gui=bold cterm=bold term=bold
-hi airline_b_bold guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238 gui=bold cterm=bold term=bold
-hi airline_b_inactive guifg=#4e4e4e guibg=#262626 ctermfg=239 ctermbg=235   
-hi airline_b_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=235   
-hi airline_b_inactive_bold guifg=#4e4e4e guibg=#262626 ctermfg=239 ctermbg=235 gui=bold cterm=bold term=bold
-hi airline_b_inactive_bold guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=235 gui=bold cterm=bold term=bold
-hi airline_b_inactive_red guifg=#ff0000 guibg=#262626 ctermfg=160 ctermbg=235   
-hi airline_b_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=235   
-hi airline_b_red guifg=#ff0000 guibg=#444444 ctermfg=160 ctermbg=238   
-hi airline_b_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=14   
-hi airline_b_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=202   
-hi airline_b_to_airline_c guifg=#444444 guibg=#202020     
-hi airline_b_to_airline_c guifg=#4f94cd guibg=#4f94cd     
-hi airline_b_to_airline_c_bold guifg=#444444 guibg=#202020   gui=bold cterm=bold term=bold
-hi airline_b_to_airline_c_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_b_to_airline_c_inactive guifg=#262626 guibg=#303030     
-hi airline_b_to_airline_c_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_b_to_airline_c_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_b_to_airline_c_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_b_to_airline_c_red guifg=#ff0000 guibg=#202020 ctermfg=160    
-hi airline_b_to_airline_c_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c guifg=#000029 guibg=#4f94cd ctermfg=85 ctermbg=234   
-hi airline_c guifg=#9cffd3 guibg=#202020 ctermfg=85 ctermbg=234   
-hi airline_c guifg=#ffffff guibg=#4f94cd ctermfg=15 ctermbg=52   
-hi airline_c guifg=#ffffff guibg=#4f94cd ctermfg=255 ctermbg=53   
-hi airline_c10_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c10_to_airline_x guifg=#4f94cd guibg=#000029     
-hi airline_c10_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c10_to_airline_x_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c10_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c10_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c10_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c10_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c11_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c11_to_airline_x guifg=#4f94cd guibg=#000029     
-hi airline_c11_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c11_to_airline_x_inactive guifg=#4f94cd guibg=#000029     
-hi airline_c11_to_airline_x_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c11_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#000029     
-hi airline_c11_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c11_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c11_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c11_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c11_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c11_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c12_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c12_to_airline_x guifg=#4f94cd guibg=#000029     
-hi airline_c12_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c12_to_airline_x_inactive guifg=#4f94cd guibg=#000029     
-hi airline_c12_to_airline_x_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c12_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#000029     
-hi airline_c12_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c12_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c12_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c12_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c12_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c12_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c1_inactive guifg=#4e4e4e guibg=#303030 ctermfg=239 ctermbg=236   
-hi airline_c1_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c1_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c1_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c1_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c1_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c3_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c5_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c5_inactive guifg=#875faf guibg=#4f94cd ctermfg=97    
-hi airline_c6_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c6_inactive guifg=#875faf guibg=#4f94cd ctermfg=97    
-hi airline_c6_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c6_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c6_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c6_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c6_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c7_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c7_inactive guifg=#875faf guibg=#4f94cd ctermfg=97    
-hi airline_c7_to_airline_x guifg=#4f94cd guibg=#000029     
-hi airline_c7_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c7_to_airline_x_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c7_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c7_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c7_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c7_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c8_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c8_to_airline_x guifg=#4f94cd guibg=#000029     
-hi airline_c8_to_airline_x_bold guifg=#4f94cd guibg=#000029   gui=bold cterm=bold term=bold
-hi airline_c8_to_airline_x_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c8_to_airline_x_inactive_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c8_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c8_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c8_to_airline_x_red guifg=#ff0000 guibg=#000029 ctermfg=160    
-hi airline_c_bold guifg=#000029 guibg=#4f94cd ctermfg=85 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_c_bold guifg=#9cffd3 guibg=#202020 ctermfg=85 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_c_bold guifg=#ffffff guibg=#4f94cd ctermfg=15 ctermbg=52 gui=bold cterm=bold term=bold
-hi airline_c_bold guifg=#ffffff guibg=#4f94cd ctermfg=255 ctermbg=53 gui=bold cterm=bold term=bold
-hi airline_c_inactive guifg=#4e4e4e guibg=#303030 ctermfg=239 ctermbg=236   
-hi airline_c_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_c_inactive guifg=#875faf guibg=#4f94cd ctermfg=97    
-hi airline_c_inactive_bold guifg=#4e4e4e guibg=#303030 ctermfg=239 ctermbg=236 gui=bold cterm=bold term=bold
-hi airline_c_inactive_bold guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236 gui=bold cterm=bold term=bold
-hi airline_c_inactive_bold guifg=#875faf guibg=#4f94cd ctermfg=97  gui=bold cterm=bold term=bold
-hi airline_c_inactive_red guifg=#ff0000 guibg=#303030 ctermfg=160 ctermbg=236   
-hi airline_c_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=236   
-hi airline_c_red guifg=#ff0000 guibg=#202020 ctermfg=160 ctermbg=234   
-hi airline_c_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=234   
-hi airline_c_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=52   
-hi airline_c_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=53   
-hi airline_c_to_airline_x guifg=#202020 guibg=#202020     
-hi airline_c_to_airline_x guifg=#4f94cd guibg=#4f94cd     
-hi airline_c_to_airline_x_bold guifg=#202020 guibg=#202020   gui=bold cterm=bold term=bold
-hi airline_c_to_airline_x_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c_to_airline_x_inactive guifg=#303030 guibg=#303030     
-hi airline_c_to_airline_x_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_c_to_airline_x_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_c_to_airline_x_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_c_to_airline_x_red guifg=#ff0000 guibg=#202020 ctermfg=160    
-hi airline_c_to_airline_x_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_error guifg=#000000 guibg=#990000 ctermfg=232 ctermbg=160   
-hi airline_error_bold guifg=#000000 guibg=#990000 ctermfg=232 ctermbg=160 gui=bold cterm=bold term=bold
-hi airline_error_inactive guifg=#000000 guibg=#990000 ctermfg=232 ctermbg=160   
-hi airline_error_inactive_bold guifg=#000000 guibg=#990000 ctermfg=232 ctermbg=160 gui=bold cterm=bold term=bold
-hi airline_error_inactive_red guifg=#ff0000 guibg=#990000 ctermfg=160 ctermbg=160   
-hi airline_error_red guifg=#ff0000 guibg=#990000 ctermfg=160 ctermbg=160   
-hi airline_warning guifg=#000000 guibg=#df5f00 ctermfg=232 ctermbg=166   
-hi airline_warning_bold guifg=#000000 guibg=#df5f00 ctermfg=232 ctermbg=166 gui=bold cterm=bold term=bold
-hi airline_warning_inactive guifg=#000000 guibg=#df5f00 ctermfg=232 ctermbg=166   
-hi airline_warning_inactive_bold guifg=#000000 guibg=#df5f00 ctermfg=232 ctermbg=166 gui=bold cterm=bold term=bold
-hi airline_warning_inactive_red guifg=#ff0000 guibg=#df5f00 ctermfg=160 ctermbg=166   
-hi airline_warning_red guifg=#ff0000 guibg=#df5f00 ctermfg=160 ctermbg=166   
-hi airline_x guifg=#000029 guibg=#4f94cd ctermfg=85 ctermbg=234   
-hi airline_x guifg=#9cffd3 guibg=#202020 ctermfg=85 ctermbg=234   
-hi airline_x guifg=#ffffff guibg=#4f94cd ctermfg=15 ctermbg=52   
-hi airline_x_bold guifg=#000029 guibg=#4f94cd ctermfg=85 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_x_bold guifg=#9cffd3 guibg=#202020 ctermfg=85 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_x_bold guifg=#ffffff guibg=#4f94cd ctermfg=15 ctermbg=52 gui=bold cterm=bold term=bold
-hi airline_x_inactive guifg=#4e4e4e guibg=#303030 ctermfg=239 ctermbg=236   
-hi airline_x_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236   
-hi airline_x_inactive_bold guifg=#4e4e4e guibg=#303030 ctermfg=239 ctermbg=236 gui=bold cterm=bold term=bold
-hi airline_x_inactive_bold guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=236 gui=bold cterm=bold term=bold
-hi airline_x_inactive_red guifg=#ff0000 guibg=#303030 ctermfg=160 ctermbg=236   
-hi airline_x_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=236   
-hi airline_x_red guifg=#ff0000 guibg=#202020 ctermfg=160 ctermbg=234   
-hi airline_x_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=234   
-hi airline_x_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=52   
-hi airline_x_to_airline_y guifg=#444444 guibg=#202020     
-hi airline_x_to_airline_y guifg=#4f94cd guibg=#4f94cd     
-hi airline_x_to_airline_y_bold guifg=#444444 guibg=#202020   gui=bold cterm=bold term=bold
-hi airline_x_to_airline_y_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_x_to_airline_y_inactive guifg=#262626 guibg=#303030     
-hi airline_x_to_airline_y_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_x_to_airline_y_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_x_to_airline_y_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_x_to_airline_y_red guifg=#ff0000 guibg=#202020 ctermfg=160    
-hi airline_x_to_airline_y_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_y guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=202   
-hi airline_y guifg=#000029 guibg=#4f94cd ctermfg=0 ctermbg=14   
-hi airline_y guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238   
-hi airline_y_bold guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=202 gui=bold cterm=bold term=bold
-hi airline_y_bold guifg=#000029 guibg=#4f94cd ctermfg=0 ctermbg=14 gui=bold cterm=bold term=bold
-hi airline_y_bold guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238 gui=bold cterm=bold term=bold
-hi airline_y_inactive guifg=#4e4e4e guibg=#262626 ctermfg=239 ctermbg=235   
-hi airline_y_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=235   
-hi airline_y_inactive_bold guifg=#4e4e4e guibg=#262626 ctermfg=239 ctermbg=235 gui=bold cterm=bold term=bold
-hi airline_y_inactive_bold guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=235 gui=bold cterm=bold term=bold
-hi airline_y_inactive_red guifg=#ff0000 guibg=#262626 ctermfg=160 ctermbg=235   
-hi airline_y_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=235   
-hi airline_y_red guifg=#ff0000 guibg=#444444 ctermfg=160 ctermbg=238   
-hi airline_y_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=14   
-hi airline_y_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=202   
-hi airline_y_to_airline_z guifg=#4f94cd guibg=#4f94cd     
-hi airline_y_to_airline_z_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_y_to_airline_z_bold guifg=#dfff00 guibg=#444444   gui=bold cterm=bold term=bold
-hi airline_y_to_airline_z_inactive guifg=#1c1c1c guibg=#262626     
-hi airline_y_to_airline_z_inactive guifg=#4f94cd guibg=#4f94cd     
-hi airline_y_to_airline_z_inactive_inactive_bold guifg=#4f94cd guibg=#4f94cd   gui=bold cterm=bold term=bold
-hi airline_y_to_airline_z_inactive_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_y_to_airline_z_red guifg=#ff0000 guibg=#444444 ctermfg=160    
-hi airline_y_to_airline_z_red guifg=#ff0000 guibg=#4f94cd ctermfg=160    
-hi airline_z guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=214   
-hi airline_z guifg=#000029 guibg=#4f94cd ctermfg=14 ctermbg=0   
-hi airline_z guifg=#00005f guibg=#dfff00 ctermfg=17 ctermbg=190   
-hi airline_z_bold guifg=#000000 guibg=#4f94cd ctermfg=232 ctermbg=214 gui=bold cterm=bold term=bold
-hi airline_z_bold guifg=#000029 guibg=#4f94cd ctermfg=14 ctermbg=0 gui=bold cterm=bold term=bold
-hi airline_z_bold guifg=#00005f guibg=#dfff00 ctermfg=17 ctermbg=190 gui=bold cterm=bold term=bold
-hi airline_z_inactive guifg=#4e4e4e guibg=#1c1c1c ctermfg=239 ctermbg=234   
-hi airline_z_inactive guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=234   
-hi airline_z_inactive_bold guifg=#4e4e4e guibg=#1c1c1c ctermfg=239 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_z_inactive_bold guifg=#4e4e4e guibg=#4f94cd ctermfg=239 ctermbg=234 gui=bold cterm=bold term=bold
-hi airline_z_inactive_red guifg=#ff0000 guibg=#1c1c1c ctermfg=160 ctermbg=234   
-hi airline_z_inactive_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=234   
-hi airline_z_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=0   
-hi airline_z_red guifg=#ff0000 guibg=#4f94cd ctermfg=160 ctermbg=214   
-hi airline_z_red guifg=#ff0000 guibg=#dfff00 ctermfg=160 ctermbg=190   
+" First let's define some arrays. The s: is just a VimL thing for scoping the
+" variables to the current script. Without this, these variables would be
+" declared globally. Now let's declare some colors for normal mode and add it
+" to the dictionary.  The array is in the format:
+" [ guifg, guibg, ctermfg, ctermbg, opts ]. See "help attr-list" for valid
+" values for the "opt" value.
+let s:N1   = [ '#000029', '#4f94cd', 14, 0 ]
+let s:N2   = [ '#000029', '#4f94cd', 0,  14 ]
+let s:N3   = [ '#000029', '#4f94cd', 85, 234 ]
+let g:airline#themes#midnight2#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+
+" Here we define overrides for when the buffer is modified.  This will be
+" applied after g:airline#themes#midnight2#palette.normal, hence why only certain keys are
+" declared.
+let g:airline#themes#midnight2#palette.normal_modified = {
+      \ 'airline_c': [ '#ffffff' , '#4f94cd' , 255     , 53      , ''     ] ,
+      \ }
+
+
+let s:I1 = [ '#00005f' , '#4f94cd' , 17  , 45  ]
+let s:I2 = [ '#ffffff' , '#4f94cd' , 255 , 27  ]
+let s:I3 = [ '#ffffff' , '#4f94cd' , 15  , 17  ]
+let g:airline#themes#midnight2#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
+let g:airline#themes#midnight2#palette.insert_modified = {
+      \ 'airline_c': [ '#ffffff' , '#4f94cd' , 255     , 53      , ''     ] ,
+      \ }
+let g:airline#themes#midnight2#palette.insert_paste = {
+      \ 'airline_a': [ s:I1[0]   , '#4f94cd' , s:I1[2] , 172     , ''     ] ,
+      \ }
+
+
+let g:airline#themes#midnight2#palette.replace = copy(g:airline#themes#midnight2#palette.insert)
+let g:airline#themes#midnight2#palette.replace.airline_a = [ s:I2[0]   , '#4f94cd' , s:I2[2] , 124     , ''     ]
+let g:airline#themes#midnight2#palette.replace_modified = g:airline#themes#midnight2#palette.insert_modified
+
+
+let s:V1 = [ '#000000' , '#4f94cd' , 232 , 214 ]
+let s:V2 = [ '#000000' , '#4f94cd' , 232 , 202 ]
+let s:V3 = [ '#ffffff' , '#4f94cd' , 15  , 52  ]
+let g:airline#themes#midnight2#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
+let g:airline#themes#midnight2#palette.visual_modified = {
+      \ 'airline_c': [ '#ffffff' , '#4f94cd' , 255     , 53      , ''     ] ,
+      \ }
+
+
+let s:IA1 = [ '#4e4e4e' , '#4f94cd' , 239 , 234 , '' ]
+let s:IA2 = [ '#4e4e4e' , '#4f94cd' , 239 , 235 , '' ]
+let s:IA3 = [ '#4e4e4e' , '#4f94cd' , 239 , 236 , '' ]
+let g:airline#themes#midnight2#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
+let g:airline#themes#midnight2#palette.inactive_modified = {
+      \ 'airline_c': [ '#875faf' , '#4f94cd' , 97 , '' , '' ] ,
+      \ }
+
+
+" Accents are used to give parts within a section a slightly different look or
+" color. Here we are defining a "red" accent, which is used by the 'readonly'
+" part by default. Only the foreground colors are specified, so the background
+" colors are automatically extracted from the underlying section colors. What
+" this means is that regardless of which section the part is defined in, it
+" will be red instead of the section's foreground color. You can also have
+" multiple parts with accents within a section.
+let g:airline#themes#midnight2#palette.accents = {
+      \ 'red': [ '#ff0000' , '' , 160 , ''  ]
+      \ }
+
+
+" Here we define the color map for ctrlp.  We check for the g:loaded_ctrlp
+" variable so that related functionality is loaded iff the user is using
+" ctrlp. Note that this is optional, and if you do not define ctrlp colors
+" they will be chosen automatically from the existing palette.
+if !get(g:, 'loaded_ctrlp', 0)
+  finish
+endif
+let g:airline#themes#midnight2#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
+      \ [ '#d7d7ff' , '#5f00af' , 189 , 55  , ''     ],
+      \ [ '#ffffff' , '#875fd7' , 231 , 98  , ''     ],
+      \ [ '#5f00af' , '#ffffff' , 55  , 231 , 'bold' ])
