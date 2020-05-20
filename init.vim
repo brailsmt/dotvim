@@ -4,7 +4,7 @@
 "let g:python_host_prog='/usr/local/bin/python'
 let g:python_host_prog='/usr/local/bin/python2'
 "set t_kb=
-
+"
 " plugin definitions
 "{{{
 call plug#begin("~/.config/nvim/vim-plug/")
@@ -49,7 +49,8 @@ Plug 'brailsmt/vim-githubinator'
 Plug 'majutsushi/tagbar'
 "Plug 'brailsmt/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'beeender/Comrade'
+"Plug 'beeender/Comrade'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -329,6 +330,15 @@ let g:DirDiffExcludes = ".git,*.class,*.exe,.*.sw*"
 "{{{
 let g:gitgutter_max_signs=2000
 "}}}
+ 
+" markdown preview settings
+" "{{{
+let g:mkdp_echo_preview_url=1
+let g:mkdp_command_for_global=1
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 0
+"}}}
+
 
 " Spell check settings
 hi SpellBad guifg=red cterm=undercurl guisp=undercurl

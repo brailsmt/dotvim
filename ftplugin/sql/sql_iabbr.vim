@@ -236,6 +236,11 @@ inoreabbr <silent> <buffer> replace <C-R>=SqlIab_ReplaceConditionally('replace',
 inoreabbr <silent> <buffer> error <C-R>=SqlIab_ReplaceConditionally('error', 'ERROR')<CR>
 inoreabbr <silent> <buffer> output <C-R>=SqlIab_ReplaceConditionally('output', 'OUTPUT')<CR>
 inoreabbr <silent> <buffer> datetime <C-R>=SqlIab_ReplaceConditionally('datetime', 'DATETIME')<CR>
+inoreabbr <silent> <buffer> inner <C-R>=SqlIab_ReplaceConditionally('datetime', 'INNER')<CR>
+inoreabbr <silent> <buffer> outer <C-R>=SqlIab_ReplaceConditionally('datetime', 'OUTER')<CR>
+inoreabbr <silent> <buffer> join <C-R>=SqlIab_ReplaceConditionally('datetime', 'JOIN')<CR>
+inoreabbr <silent> <buffer> left <C-R>=SqlIab_ReplaceConditionally('datetime', 'LEFT')<CR>
+inoreabbr <silent> <buffer> right <C-R>=SqlIab_ReplaceConditionally('datetime', 'RIGHT')<CR>
 
 function! SqlIab_ReplaceConditionally(original, replacement)
   " only replace outside of comments or strings (which map to constant)
